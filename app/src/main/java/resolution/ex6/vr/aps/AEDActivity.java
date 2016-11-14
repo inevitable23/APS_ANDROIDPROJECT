@@ -1,16 +1,22 @@
 package resolution.ex6.vr.aps;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nhn.android.maps.NMapActivity;
@@ -27,8 +33,13 @@ import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager.OnCalloutOverlayListener;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
-import static com.google.android.gms.analytics.internal.zzy.t;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
 
 public class AEDActivity extends NMapActivity
         implements OnMapStateChangeListener, OnCalloutOverlayListener{
@@ -52,11 +63,32 @@ public class AEDActivity extends NMapActivity
     double latitude = -1;
 
 
+    /******************제세동기 공공데이터 관련 변수***************/
+    private static ArrayList<String> jusoArr = new ArrayList<>();
+    private static ArrayList<String> jangsoArr = new ArrayList<>();
+    private static ArrayList<String> telArr = new ArrayList<>();
+    private static ArrayList<String> lonArr = new ArrayList<>(); // 북위
+    private static ArrayList<String> latArr = new ArrayList<>(); // 동경
+
+    EditText edit;
+    TextView text;
+
+    ListView listview;
+    ListViewAdapter adapter;
+
+    XmlPullParser xpp;
+
+    String data;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aed);
-        startLocationService();
+
+        Intent intent = getIntent();
+        longitude = intent.getExtras().getDouble("longitude");
+        latitude = intent.getExtras().getDouble("lat");
+
         /******************* 지도 초기화 시작 ********************/
         // 네이버 지도를 넣기 위한 LinearLayout 컴포넌트
         MapContainer = (LinearLayout) findViewById(R.id.MapContainer);
@@ -75,8 +107,7 @@ public class AEDActivity extends NMapActivity
 
         // 확대/축소를 위한 줌 컨트롤러 표시 옵션 활성화
         mMapView.setBuiltInZoomControls(true, null);
-
-
+        showMyLocation(latitude, longitude);
 
 
         /******************* 지도 초기화 끝 ********************/
@@ -93,6 +124,63 @@ public class AEDActivity extends NMapActivity
         mOverlayManager = new NMapOverlayManager(this, mMapView,
                 mMapViewerResourceProvider);
 
+
+        /*********************제세동기 위치 관련************************/
+
+        text = (TextView) findViewById(R.id.text);
+
+
+        // Adapter 생성
+        adapter = new ListViewAdapter();
+
+        // 리스트뷰 참조 및 Adapter달기
+        listview = (ListView) findViewById(R.id.listview1);
+        listview.setAdapter(adapter);
+
+        //Android 4.0 이상 부터는 네트워크를 이용할 때 반드시 Thread 사용해야 함
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                data = getXmlData(); //아래 메소드를 호출하여 XML data를 파싱해서 String 객체로 얻어오기
+                //UI Thread(Main Thread)를 제외한 어떤 Thread도 화면을 변경할 수 없기때문에
+                //runOnUiThread()를 이용하여 UI Thread가 TextView 글씨 변경하도록 함
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+                        //    text.setText(data);  //TextView에 문자열  data 출력
+                    }
+                });
+
+            }
+        }).start();
+
+
+        //스레드 시간차
+        if(jangsoArr.size() != 0) {
+            for (int j = 0; j < 10; j++) {
+                adapter.addItem(ContextCompat.getDrawable(this, R.drawable.tele),
+                        jangsoArr.get(j), jusoArr.get(j));
+
+            }
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                    ListViewItem item = (ListViewItem) parent.getItemAtPosition(position);
+                    Drawable iconDrawable = item.getIcon();
+                    Intent intent;
+                    Uri uri;
+                    uri = Uri.parse("tel:"+telArr.get(position));
+                    intent = new Intent(Intent.ACTION_DIAL, uri);
+                    startActivity(intent);
+                }
+            });
+
+
+        }
     }
 
     /**
@@ -147,56 +235,6 @@ public class AEDActivity extends NMapActivity
 
 
 
-    //현재 위치를 찾는것.
-    private void startLocationService() {
-
-        // get manager instance
-        manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        long minTime = 1000;
-        float minDistance = 0;
-        if (ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getApplicationContext(), "체크 퍼미션", Toast.LENGTH_SHORT).show();
-            return  ;
-        }
-        manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, mLocationListener);
-        manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistance, mLocationListener);
-
-    }
-    private void stopLocationService(){
-        if (ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getApplicationContext(), "체크 퍼미션", Toast.LENGTH_SHORT).show();
-            return  ;
-        }
-        manager.removeUpdates(mLocationListener);
-    }
-
-    private final LocationListener mLocationListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-            showMyLocation(latitude, longitude);
-            stopLocationService();
-        }
-
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String s) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String s) {
-
-        }
-    };
     private void showMyLocation(double latitude, double longitude){
         NMapViewerResourceProvider nMapViewerResourceProvider = null;
         NMapOverlayManager nMapOverlayManager;
@@ -226,4 +264,102 @@ public class AEDActivity extends NMapActivity
         NMapController controller = mMapView.getMapController();
         controller.animateTo(myPoint);
     }
+
+
+
+    /**********************제세동기 파싱 *******************************/
+    //XmlPullParser를 이용하여 Naver 에서 제공하는 OpenAPI XML 파일 파싱하기(parsing)
+    String getXmlData() {
+
+        double lon =  longitude;
+        double lat = latitude;
+        StringBuffer buffer = new StringBuffer();
+
+        String queryUrl = "http://openapi.e-gen.or.kr/openapi/service/rest/AEDInfoInqireService/getAedLcinfoInqire?serviceKey=sOeLXw%2B0H2SQr5smAbXhw2Q%2FK6SbySO0oS49h2OW1n4BjyHGRm%2FrXP3DT6n1cywpwCBOYkp92tK3C9FhZEw4YA%3D%3D&" +
+                "WGS84_LON=" + lon + "&WGS84_LAT=" + lat +
+                "&numOfRows=10&pageSize=1&pageNo=1&startPage=1";
+
+        try {
+            URL url = new URL(queryUrl); //문자열로 된 요청 url을 URL 객체로 생성.
+            InputStream is = url.openStream();  //url위치로 입력스트림 연결
+
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            XmlPullParser xpp = factory.newPullParser();
+            xpp.setInput(new InputStreamReader(is, "UTF-8"));  //inputstream 으로부터 xml 입력받기
+
+            String tag;
+
+            xpp.next();
+            int eventType = xpp.getEventType();
+
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                switch (eventType) {
+                    case XmlPullParser.START_DOCUMENT:
+                        buffer.append("start XML parsing...\n\n");
+                        break;
+
+                    case XmlPullParser.START_TAG:
+                        tag = xpp.getName();    //테그 이름 얻어오기
+
+                        if (tag.equals("item")) ;// 첫번째 검색결과
+                        else if (tag.equals("buildAddress")) {
+                            buffer.append("주소 : ");
+                            xpp.next();
+                            buffer.append(xpp.getText());//title 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            jusoArr.add(xpp.getText().toString());
+                            buffer.append("\n");          //줄바꿈 문자 추가
+                        } else if (tag.equals("org")) {
+                            buffer.append("장소 : ");
+                            xpp.next();
+                            buffer.append(xpp.getText()); //category 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            jangsoArr.add(xpp.getText().toString());
+                            buffer.append("\n");          //줄바꿈 문자 추가
+                        } else if (tag.equals("managerTel")) {
+                            buffer.append("연락처 :");
+                            xpp.next();
+                            telArr.add(xpp.getText().toString());
+                            buffer.append(xpp.getText()); //telephone 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("\n");          //줄바꿈 문자 추가
+                        } else if (tag.equals("wgs84Lat")) {
+                            buffer.append("북위 :");
+                            xpp.next();
+                            lonArr.add(xpp.getText().toString());
+                            buffer.append(xpp.getText()); //mapx 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("  ,  ");          //줄바꿈 문자 추가
+                        } else if (tag.equals("wgs84Lon")) {
+                            buffer.append("동경 :");
+                            xpp.next();
+                            latArr.add(xpp.getText().toString());
+                            buffer.append(xpp.getText()); //mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("\n");          //줄바꿈 문자 추가
+                        }
+
+                        //  adapter.addItem(ContextCompat.getDrawable(this, R.drawable.tele),
+                        //        String.valueOf(i) , String.valueOf(i));
+                        //  i++;
+
+                        break;
+
+                    case XmlPullParser.TEXT:
+                        break;
+
+                    case XmlPullParser.END_TAG:
+                        tag = xpp.getName();    //테그 이름 얻어오기
+
+                        if (tag.equals("item")) buffer.append("\n"); // 첫번째 검색결과종료..줄바꿈
+
+                        break;
+                }
+
+                eventType = xpp.next();
+            }
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return buffer.toString(); //StringBuffer 문자열 객체 반환
+
+    }//getXmlData method....
 }

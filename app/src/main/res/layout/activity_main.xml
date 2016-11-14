@@ -6,8 +6,23 @@
     android:layout_height="match_parent"
     android:background="#feb702"
     tools:context="resolution.ex6.vr.aps.MainActivity">
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/find_patient_Button"/>
+        android:id="@+id/find_patient_Button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="105dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/find_myLocation"
+        android:layout_alignBaseline="@+id/find_patient_Button"
+        android:layout_alignBottom="@+id/find_patient_Button"
+        android:layout_alignParentEnd="true"
+        android:text="findLocation"
+        android:layout_marginEnd="76dp" />
 </RelativeLayout>
