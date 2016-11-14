@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-/////////////////////////////////////////20161114 22:37
+
     LocationManager manager;
     Intent aedintent;
     //현재 위치 값
