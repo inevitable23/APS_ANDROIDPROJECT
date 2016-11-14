@@ -40,7 +40,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
-
+//
 public class AEDActivity extends NMapActivity
         implements OnMapStateChangeListener, OnCalloutOverlayListener{
 
