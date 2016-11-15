@@ -11,7 +11,7 @@ public class ListViewItem {
     private String jangsoStr;
     private Drawable iconDrawable;
     private Drawable iconDrawableTwo;
-
+//
     public void setDist(String dist) { distStr = dist; }
     public void setJuso(String juso) { jusoStr = juso; }
     public void setJangso(String jangso) { jangsoStr = jangso; }

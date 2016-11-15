@@ -2,13 +2,10 @@ package resolution.ex6.vr.aps;
 
 import android.content.Intent;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -38,7 +35,7 @@ import java.net.URL;
 import java.util.ArrayList;
 //adasd
 public class AEDActivity extends NMapActivity
-        implements OnMapStateChangeListener, OnCalloutOverlayListener{
+        implements OnMapStateChangeListener, OnCalloutOverlayListener, ListViewAdapter.ListClickListener{
 
     // API-KEY
     public static final String API_KEY = "mo8MMpoxRZggZYZ9JdKy";
@@ -60,12 +57,12 @@ public class AEDActivity extends NMapActivity
 
 
     /******************제세동기 공공데이터 관련 변수***************/
-    private static ArrayList<String> jusoArr = new ArrayList<>();
-    private static ArrayList<String> jangsoArr = new ArrayList<>();
-    private static ArrayList<String> telArr = new ArrayList<>();
-    private static ArrayList<String> lonArr = new ArrayList<>(); // 북위
-    private static ArrayList<String> latArr = new ArrayList<>(); // 동경
-    private static ArrayList<String> distArr = new ArrayList<>();
+    public static ArrayList<String> jusoArr = new ArrayList<>();
+    public static ArrayList<String> jangsoArr = new ArrayList<>();
+    public static ArrayList<String> telArr = new ArrayList<>();
+    public static ArrayList<String> lonArr = new ArrayList<>(); // 북위
+    public static ArrayList<String> latArr = new ArrayList<>(); // 동경
+    public static ArrayList<String> distArr = new ArrayList<>();
 
     EditText edit;
     TextView text;
@@ -128,8 +125,9 @@ public class AEDActivity extends NMapActivity
         text = (TextView) findViewById(R.id.text);
 
 
+        ArrayList<ListViewItem> items = new ArrayList<ListViewItem>() ;
         // Adapter 생성
-        adapter = new ListViewAdapter();
+        adapter = new ListViewAdapter(this, R.layout.item, items, this);
 
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) findViewById(R.id.listview1);
@@ -171,18 +169,6 @@ public class AEDActivity extends NMapActivity
                         ContextCompat.getDrawable(this, R.drawable.marking));
                 adapter.notifyDataSetChanged();
             }
-            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                    ListViewItem item = (ListViewItem) parent.getItemAtPosition(position);
-                    Drawable iconDrawable = item.getIcon();
-                    Intent intent;
-                    Uri uri;
-                    uri = Uri.parse("tel:"+telArr.get(position));
-                    intent = new Intent(Intent.ACTION_DIAL, uri);
-                    startActivity(intent);
-                }
-            });
         }
     }
 
@@ -373,4 +359,13 @@ public class AEDActivity extends NMapActivity
         return buffer.toString(); //StringBuffer 문자열 객체 반환
 
     }//getXmlData method....
+
+    @Override
+    public void onListClick(int position) {
+        Intent intent;
+        Uri uri;
+        uri = Uri.parse("tel:"+telArr.get(position));
+        intent = new Intent(Intent.ACTION_DIAL, uri);
+        startActivity(intent);
+    }
 }
