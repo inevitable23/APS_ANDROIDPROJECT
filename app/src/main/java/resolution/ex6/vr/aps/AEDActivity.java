@@ -1,12 +1,8 @@
 package resolution.ex6.vr.aps;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -69,6 +65,7 @@ public class AEDActivity extends NMapActivity
     private static ArrayList<String> telArr = new ArrayList<>();
     private static ArrayList<String> lonArr = new ArrayList<>(); // 북위
     private static ArrayList<String> latArr = new ArrayList<>(); // 동경
+    private static ArrayList<String> distArr = new ArrayList<>();
 
     EditText edit;
     TextView text;
@@ -170,7 +167,8 @@ public class AEDActivity extends NMapActivity
             for (int j = 0; j < 10; j++) {
 
                 adapter.addItem(ContextCompat.getDrawable(this, R.drawable.tele),
-                        jangsoArr.get(j), jusoArr.get(j));
+                        jangsoArr.get(j), jusoArr.get(j), distArr.get(j),
+                        ContextCompat.getDrawable(this, R.drawable.marking));
                 adapter.notifyDataSetChanged();
             }
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -313,7 +311,15 @@ public class AEDActivity extends NMapActivity
                             buffer.append(xpp.getText());//title 요소의 TEXT 읽어와서 문자열버퍼에 추가
                             jusoArr.add(xpp.getText().toString());
                             buffer.append("\n");          //줄바꿈 문자 추가
-                        } else if (tag.equals("org")) {
+                        }
+                        else if (tag.equals("distance")) {
+                            buffer.append("거리");
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            distArr.add(xpp.getText().toString()+"km");
+                            buffer.append("\n");
+                        }
+                        else if (tag.equals("org")) {
                             buffer.append("장소 : ");
                             xpp.next();
                             buffer.append(xpp.getText()); //category 요소의 TEXT 읽어와서 문자열버퍼에 추가

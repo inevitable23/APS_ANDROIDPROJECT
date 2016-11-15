@@ -40,16 +40,21 @@ public class ListViewAdapter extends BaseAdapter {
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
         ImageView iconImageView = (ImageView) convertView.findViewById(R.id.telImageView) ;
+        ImageView iconImageViewTwo = (ImageView) convertView.findViewById(R.id.markImageView);
         TextView jangsoTextView = (TextView) convertView.findViewById(R.id.jangsoTextView) ;
         TextView jusoTextView = (TextView) convertView.findViewById(R.id.jusoTextView) ;
+        TextView distTextView = (TextView) convertView.findViewById(R.id.distTextView) ;
+
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         ListViewItem listViewItem = listViewItemList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
         iconImageView.setImageDrawable(listViewItem.getIcon());
+        iconImageViewTwo.setImageDrawable(listViewItem.getIconTwo());
         jangsoTextView.setText(listViewItem.getJangso());
         jusoTextView.setText(listViewItem.getJuso());
+        distTextView.setText(listViewItem.getDist());
 
         return convertView;
     }
@@ -67,12 +72,15 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(Drawable icon, String jangso, String juso) {
+    public void addItem(Drawable icon, String jangso, String juso, String dist, Drawable iconTwo) {
         ListViewItem item = new ListViewItem();
 
         item.setIcon(icon);
         item.setJangso(jangso);
         item.setJuso(juso);
+        item.setIconTwo(iconTwo);
+        item.setDist(dist);
+
 
         listViewItemList.add(item);
     }
