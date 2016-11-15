@@ -76,6 +76,7 @@ public class AEDActivity extends NMapActivity
     ListView listview;
     ListViewAdapter adapter;
 
+
     XmlPullParser xpp;
 
     String data;
@@ -138,7 +139,7 @@ public class AEDActivity extends NMapActivity
         listview.setAdapter(adapter);
 
         //Android 4.0 이상 부터는 네트워크를 이용할 때 반드시 Thread 사용해야 함
-        new Thread(new Runnable() {
+        Thread thread = new Thread(new Runnable() {
 
             @Override
             public void run() {
@@ -156,15 +157,21 @@ public class AEDActivity extends NMapActivity
                 });
 
             }
-        }).start();
-
+        });
+        thread.start();
+        try {
+            thread.join();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         //스레드 시간차
         if(jangsoArr.size() != 0) {
             for (int j = 0; j < 10; j++) {
+
                 adapter.addItem(ContextCompat.getDrawable(this, R.drawable.tele),
                         jangsoArr.get(j), jusoArr.get(j));
-
+                adapter.notifyDataSetChanged();
             }
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -178,8 +185,6 @@ public class AEDActivity extends NMapActivity
                     startActivity(intent);
                 }
             });
-
-
         }
     }
 
