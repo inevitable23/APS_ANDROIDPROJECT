@@ -11,18 +11,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/find_patient_Button"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="105dp" />
+        android:text="환자 위치 확인"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/find_myLocation"
-        android:layout_alignBaseline="@+id/find_patient_Button"
-        android:layout_alignBottom="@+id/find_patient_Button"
-        android:layout_alignParentEnd="true"
-        android:text="findLocation"
-        android:layout_marginEnd="76dp" />
+        android:id="@+id/find_aed_button"
+        android:layout_marginBottom="53dp"
+        android:text="제세동기 위치 확인"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/find_patient_Button" />
+
+    <Button
+        android:text="응급 처치"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/find_aed_button"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="27dp"
+        android:id="@+id/emergency_button" />
 </RelativeLayout>

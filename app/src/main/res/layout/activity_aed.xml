@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#feb702"
     tools:context="resolution.ex6.vr.aps.AEDActivity">
 
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
         android:id="@+id/MapContainer"
-        android:layout_margin="5dp"
        ></LinearLayout>
     <TextView
         android:id="@+id/text"
         android:layout_below="@+id/MapContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="0"
         android:textSize="8sp"
         android:textStyle="bold"/>
 
     <ListView
         android:background="#ffffff"
-        android:layout_margin="5dp"
         android:id="@+id/listview1"
         android:layout_width="match_parent"
-        android:layout_below="@+id/text"
-        android:layout_height="300dp"
-        android:divider="#00000000"/>
+        android:layout_height="0dp"
+        android:layout_weight="2"/>
 
 
-</RelativeLayout>
+</LinearLayout>

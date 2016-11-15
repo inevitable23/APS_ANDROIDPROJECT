@@ -1,0 +1,45 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/emergency2"
+    tools:context="resolution.ex6.vr.aps.Emergency1Fragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="STEP2 가슴압박 시작" />
+        <VideoView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:id="@+id/frag2_video"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="1. 가슴의 중앙인 흉골의 아래쪽 절반부위에 손바닥을 위치시킨다." />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="2. 양손을 깍지 낀 상태로 손바닥의 아래 부위만을 화자의 흉골부위에 접촉시킨다." />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="3. 시술자의 어깨는 환자의 흉골이 맞닿는 부위와 수직이 되게 위치한다." />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="4. 양쪽 어깨 힘을 이용하여 분당 100회 이상의 속도로 5cm 이상 깊이로 강하고 빠르게 30회 눌러준다." />
+    </LinearLayout>
+
+</FrameLayout>

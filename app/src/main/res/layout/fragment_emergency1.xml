@@ -1,0 +1,39 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/emergency1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="resolution.ex6.vr.aps.Emergency1Fragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="STEP1 의식확인 및 119 신고" />
+
+        <VideoView
+            android:id="@+id/frag1_video"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="1. 환자를 바로 눕힌 후 어깨를 가볍게 치면서 의식이 있는지 확인한다." />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="2. 주변 사람들에게 119신고 및 자동제세동기를 가져올 것을 요청한다." />
+    </LinearLayout>
+</FrameLayout>

@@ -18,34 +18,55 @@ public class MainActivity extends AppCompatActivity {
     LocationManager manager;
     Intent aedintent;
     //현재 위치 값
-    double longitude = -1;
-    double latitude = -1;
+    static double  longitude = -1;
+    static double latitude = -1;
     //
+    /***************레이아웃관련 변수 ***********/
+    Button find_patient_Button;
+    Button find_AED_Button;
+    Button emergnecy_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button find_patient_Button = (Button)findViewById(R.id.find_patient_Button);
-        Button findLocationButton = (Button)findViewById(R.id.find_myLocation);
-        find_patient_Button.setOnClickListener(new View.OnClickListener() {
+        layoutinit();
+        find_AED_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startLocationService();
                 aedintent = new Intent(getApplicationContext(),AEDActivity.class);
                 if(longitude != -1 && latitude != -1) {
-
+                    aedintent.putExtra("longitude", longitude);
+                    aedintent.putExtra("lat", latitude);
+                    startActivity(aedintent);
                 }else{
+                    startLocationService();
                     Toast.makeText(getApplicationContext(), "현재 위치를 찾는중...", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        findLocationButton.setOnClickListener(new View.OnClickListener() {
+        find_patient_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(getApplicationContext(), PatientActivity.class);
+                startActivity(i);
             }
         });
+        emergnecy_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), EmergencylectureActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
+    /***********layout inflater **********/
+    public void layoutinit(){
+        find_patient_Button = (Button)findViewById(R.id.find_patient_Button);
+        find_AED_Button = (Button)findViewById(R.id.find_aed_button);
+        emergnecy_button = (Button) findViewById(R.id.emergency_button);
+    }
+
     //현재 위치를 찾는것.
     private void startLocationService() {
 
