@@ -36,6 +36,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+
+import static android.os.Build.VERSION_CODES.N;
+import static com.google.android.gms.analytics.internal.zzy.D;
+import static java.lang.Double.parseDouble;
+
 //adasd
 public class AEDActivity extends NMapActivity
         implements OnMapStateChangeListener, OnCalloutOverlayListener{
@@ -54,6 +59,7 @@ public class AEDActivity extends NMapActivity
     // 오버레이 관리자
     NMapOverlayManager mOverlayManager;
     LocationManager manager;
+
     //현재 위치 값
     double longitude = -1;
     double latitude = -1;
@@ -105,7 +111,7 @@ public class AEDActivity extends NMapActivity
 
         // 확대/축소를 위한 줌 컨트롤러 표시 옵션 활성화
         mMapView.setBuiltInZoomControls(true, null);
-        showMyLocation(latitude, longitude);
+        //showMyLocation(latitude, longitude);
 
 
         /******************* 지도 초기화 끝 ********************/
@@ -171,6 +177,8 @@ public class AEDActivity extends NMapActivity
                         ContextCompat.getDrawable(this, R.drawable.marking));
                 adapter.notifyDataSetChanged();
             }
+            Toast.makeText(getApplicationContext(), latitude+" "+longitude+"showAEDList전", Toast.LENGTH_SHORT).show();
+            showAEDList(latitude, longitude);
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -264,6 +272,41 @@ public class AEDActivity extends NMapActivity
         // 지도의 중심과 ZOOM을 재설정
         poiDataOverlay.showAllPOIdata(0);
 
+        NMapController controller = mMapView.getMapController();
+        controller.animateTo(myPoint);
+    }
+
+    private void showAEDList(double latitude, double longitude){
+        NMapViewerResourceProvider nMapViewerResourceProvider = null;
+        NMapOverlayManager nMapOverlayManager;
+
+        nMapViewerResourceProvider = new NMapViewerResourceProvider(this);
+        nMapOverlayManager = new NMapOverlayManager(this, mMapView, nMapViewerResourceProvider);
+
+        NGeoPoint myPoint = new NGeoPoint(longitude, latitude);
+
+        // 오버레이들을 관리하기 위한 id값 생성
+        int markerId = NMapPOIflagType.PIN;
+
+        // 표시할 위치 데이터를 지정한다. 마지막 인자가 오버레이를 인식하기 위한 id값
+        NMapPOIdata poiData = new NMapPOIdata(11, nMapViewerResourceProvider);
+        poiData.beginPOIdata(11);
+        poiData.addPOIitem(myPoint,  "현재위치", markerId, 11);
+        for(int i = 0; i < 10; i++) {
+            Double longtitude1 = parseDouble(lonArr.get(i));
+            Double latitude1 = parseDouble(latArr.get(i));
+            NGeoPoint tempPoint = new NGeoPoint(latitude1, longtitude1);
+            poiData.addPOIitem(tempPoint, jangsoArr.get(i),  NMapPOIflagType.NUMBER_BASE + i, 11);
+        }
+        poiData.endPOIdata();
+
+        // 위치 데이터를 사용하여 오버레이 생성
+        NMapPOIdataOverlay poiDataOverlay
+                = nMapOverlayManager.createPOIdataOverlay(poiData, null);
+
+        // id값이 0으로 지정된 모든 오버레이가 표시되고 있는 위치로
+        // 지도의 중심과 ZOOM을 재설정
+        poiDataOverlay.showAllPOIdata(11);
         NMapController controller = mMapView.getMapController();
         controller.animateTo(myPoint);
     }
