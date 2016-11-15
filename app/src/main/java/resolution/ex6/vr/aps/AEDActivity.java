@@ -368,4 +368,5 @@ public class AEDActivity extends NMapActivity
         intent = new Intent(Intent.ACTION_DIAL, uri);
         startActivity(intent);
     }
+    //
 }
