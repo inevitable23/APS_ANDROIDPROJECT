@@ -12,44 +12,39 @@
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:textColor="#e67339"
             android:text="STEP3 자동심장충격기 사용"
             android:textStyle="bold"/>
         <VideoView
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="9"
-            android:id="@+id/frag3_video"/>
+            android:layout_height="350dp"
+            android:id="@+id/frag3_video"
+            android:layout_marginBottom="10dp"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="1. 자동심장충격기의 전원을 켠다."
             android:textStyle="bold"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="2. 환자에게 패드를 붙인다.\n-패드를 붙이는 동안에도 심폐소생술을 계속해야 합니다." />
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="3. 제세동 버튼을 누른다(심장박동 분석).\n-심폐소생술을 하지 않고 환자에게서 물러납니다." />
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="4. 자동심장충격기가 충전을 하는 동안 심폐소생술을 계속 한다." />
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="5. 제세동 버튼을 누른다(전기충격 제공)." />
     </LinearLayout>

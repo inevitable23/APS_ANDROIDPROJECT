@@ -12,20 +12,19 @@
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:textColor="#e46423"
             android:text="STEP4 가슴압박 반복"
             android:textStyle="bold"/>
         <VideoView
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="9"
-            android:id="@+id/frag4_video"/>
+            android:layout_height="350dp"
+            android:id="@+id/frag4_video"
+            android:layout_marginBottom="10dp"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="1. 119 구급대가 도착하기 전까지 가슴압박을 계속 한다."
             android:textStyle="bold"/>
 
