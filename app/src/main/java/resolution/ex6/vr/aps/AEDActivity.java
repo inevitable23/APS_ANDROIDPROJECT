@@ -99,17 +99,12 @@ public class AEDActivity extends NMapActivity
         MapContainer = (LinearLayout) findViewById(R.id.MapContainer);
         // 네이버 지도 객체 생성
         mMapView = new NMapView(this);
-
-
         // 네이버 지도 객체에 APIKEY 지정
         mMapView.setApiKey(API_KEY);
-
         // 생성된 네이버 지도 객체를 LinearLayout에 추가시킨다.
         MapContainer.addView(mMapView);
-
         // 지도를 터치할 수 있도록 옵션 활성화
         mMapView.setClickable(true);
-
         // 확대/축소를 위한 줌 컨트롤러 표시 옵션 활성화
         mMapView.setBuiltInZoomControls(true, null);
         //showMyLocation(latitude, longitude);

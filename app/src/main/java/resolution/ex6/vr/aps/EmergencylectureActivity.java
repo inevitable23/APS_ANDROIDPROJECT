@@ -2,10 +2,12 @@ package resolution.ex6.vr.aps;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class EmergencylectureActivity extends AppCompatActivity {
@@ -108,6 +110,19 @@ public class EmergencylectureActivity extends AppCompatActivity {
     }
 
     public void layoutinit() {
+        View view = getLayoutInflater().inflate(R.layout.customlayout, null);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setCustomView(view);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        TextView textView = (TextView)findViewById(R.id.custom_textview);
+        textView.setText("심폐소생술 시작하기");
+        ImageView custom_imageview = (ImageView)findViewById(R.id.custom_imageview);
+        custom_imageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         emergency_button1 = (Button) findViewById(R.id.emergency_button1);
         emergency_button2 = (Button) findViewById(R.id.emergency_button2);
         emergency_button3 = (Button) findViewById(R.id.emergency_button3);
