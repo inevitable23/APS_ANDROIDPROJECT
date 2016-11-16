@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:id="@+id/emergency_button2"
-            android:src="@drawable/steptwo"
+            android:src="@drawable/step2_off"
             />
 
         <ImageView
@@ -33,7 +33,7 @@
             android:layout_weight="1.10"
             android:layout_height="match_parent"
             android:id="@+id/emergency_button3"
-            android:src="@drawable/stepthree"
+            android:src="@drawable/step3_off"
             android:adjustViewBounds="true"
             android:maxHeight="3dp"
             android:maxWidth="10dp"
@@ -44,7 +44,7 @@
             android:layout_weight="0.89"
             android:layout_height="match_parent"
             android:id="@+id/emergency_button4"
-            android:src="@drawable/stepfour"
+            android:src="@drawable/step4_off"
             android:adjustViewBounds="true"
             android:maxHeight="3dp"
             android:maxWidth="10dp"

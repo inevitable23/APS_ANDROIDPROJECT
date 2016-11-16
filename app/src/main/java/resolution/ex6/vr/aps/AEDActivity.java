@@ -85,7 +85,6 @@ public class AEDActivity extends NMapActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aed);
-
         Intent intent = getIntent();
         longitude = intent.getExtras().getDouble("longitude");
         latitude = intent.getExtras().getDouble("lat");

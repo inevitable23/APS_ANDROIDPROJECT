@@ -48,6 +48,7 @@ public class EmergencylectureActivity extends AppCompatActivity {
         emergency_button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setStepImage(1);
                 getSupportFragmentManager().beginTransaction().
                         replace(R.id.container, emergency1Fragment)
                         .commit();
@@ -58,6 +59,9 @@ public class EmergencylectureActivity extends AppCompatActivity {
         emergency_button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setStepImage(2);
+                emergency_button2.setImageResource(R.drawable.steptwo);
+                emergency_button3.setImageResource(R.drawable.step3_off);
                 getSupportFragmentManager().beginTransaction().
                         replace(R.id.container, emergency2Fragment)
                         .commit();
@@ -67,6 +71,7 @@ public class EmergencylectureActivity extends AppCompatActivity {
         emergency_button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setStepImage(3);
                 getSupportFragmentManager().beginTransaction().
                         replace(R.id.container, emergency3Fragment)
                         .commit();
@@ -76,6 +81,7 @@ public class EmergencylectureActivity extends AppCompatActivity {
         emergency_button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setStepImage(4);
                 getSupportFragmentManager().beginTransaction().
                         replace(R.id.container, emergency4Fragment)
                         .commit();
@@ -87,6 +93,7 @@ public class EmergencylectureActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int fragmentId = (currentPage + 1);
                 if(fragmentId == 5) fragmentId = 1;
+                setStepImage(fragmentId);
                 Fragment fragment = findFragmentId(fragmentId);
                 getSupportFragmentManager().beginTransaction().
                         replace(R.id.container, fragment)
@@ -99,6 +106,7 @@ public class EmergencylectureActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int fragmentId = currentPage - 1;
                 if (fragmentId == 0) fragmentId = 4;
+                setStepImage(fragmentId);
                 Fragment fragment = findFragmentId(fragmentId);
                 getSupportFragmentManager().beginTransaction().
                         replace(R.id.container, fragment)
@@ -142,5 +150,25 @@ public class EmergencylectureActivity extends AppCompatActivity {
             return emergency4Fragment;
         }
         return new Fragment();
+    }
+    public void setStepImage(int stepNumber){
+        if(stepNumber == 1){
+            emergency_button2.setImageResource(R.drawable.step2_off);
+            emergency_button3.setImageResource(R.drawable.step3_off);
+            emergency_button4.setImageResource(R.drawable.step4_off);
+        }else if(stepNumber == 2){
+            emergency_button2.setImageResource(R.drawable.steptwo);
+            emergency_button3.setImageResource(R.drawable.step3_off);
+            emergency_button4.setImageResource(R.drawable.step4_off);
+        }else if(stepNumber == 3){
+            emergency_button2.setImageResource(R.drawable.steptwo);
+            emergency_button3.setImageResource(R.drawable.stepthree);
+            emergency_button4.setImageResource(R.drawable.step4_off);
+
+        }else if(stepNumber == 4){
+            emergency_button2.setImageResource(R.drawable.steptwo);
+            emergency_button3.setImageResource(R.drawable.stepthree);
+            emergency_button4.setImageResource(R.drawable.stepfour);
+        }
     }
 }
