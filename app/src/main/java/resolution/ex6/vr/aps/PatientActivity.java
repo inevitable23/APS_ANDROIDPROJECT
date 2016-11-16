@@ -54,7 +54,7 @@ public class PatientActivity extends AppCompatActivity {
         actionBar.setCustomView(view);
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         TextView textView = (TextView)findViewById(R.id.custom_textview);
-        textView.setText("환자 위치 확인");
+        textView.setText("환자 위치");
         ImageView custom_imageview = (ImageView)findViewById(R.id.custom_imageview);
         custom_imageview.setOnClickListener(new View.OnClickListener() {
             @Override
