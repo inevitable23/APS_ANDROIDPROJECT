@@ -156,7 +156,7 @@ public abstract class NMapCalloutOverlayView extends FrameLayout implements
 	/**
 	 * Register a callback to be invoked when this callout is clicked
 	 * 
-	 * @param l the click listener to attach to this callout overlay
+	 * @param //click listener to attach to this callout overlay
 	 */
 	@Override
 	public void setOnClickListener(NMapCalloutOverlay.OnClickListener listener) {

@@ -303,8 +303,6 @@ public class NMapCalloutCustomOldOverlay extends NMapCalloutOverlay {
 			mTitleTruncated = title;
 
 			if (DEBUG) {
-				Log.i(LOG_TAG, "adjustTextBounds: mTitleTruncated=" + mTitleTruncated + ", length="
-					+ mTitleTruncated.length());
 			}
 		}
 
@@ -319,8 +317,6 @@ public class NMapCalloutCustomOldOverlay extends NMapCalloutOverlay {
 		}
 
 		if (DEBUG) {
-			Log.i(LOG_TAG, "adjustTextBounds: mTempRect.width=" + mTempRect.width() + ", mTempRect.height="
-				+ mTempRect.height());
 		}
 
 		//  Setup the callout with the right size & location
