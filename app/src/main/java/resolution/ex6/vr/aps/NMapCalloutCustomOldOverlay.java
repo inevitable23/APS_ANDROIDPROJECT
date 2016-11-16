@@ -283,8 +283,7 @@ public class NMapCalloutCustomOldOverlay extends NMapCalloutOverlay {
 			mWidthTitleTruncated = mapViewWidth;
 			float maxWidth = mWidthTitleTruncated - 2 * mMarginX - 2 * mPaddingX;
 			if (DEBUG) {
-				Log.i(LOG_TAG, "adjustTextBounds: maxWidth=" + maxWidth + ", mMarginX=" + mMarginX + ", mPaddingX="
-					+ mPaddingX);
+
 			}
 
 			if (mDrawableRightButton != null) {
