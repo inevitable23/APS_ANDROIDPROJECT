@@ -61,13 +61,15 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="New Button" />
+            android:text="이전"
+            android:id="@+id/prevButton"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="New Button" />
+            android:text="다음"
+            android:id="@+id/nextButton"/>
 
 
     </LinearLayout>

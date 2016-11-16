@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="STEP1 의식확인 및 119 신고" />
+            android:text="STEP1 의식확인 및 119 신고"
+            android:textStyle="bold"/>
 
         <VideoView
             android:id="@+id/frag1_video"

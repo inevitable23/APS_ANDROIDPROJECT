@@ -14,12 +14,19 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="emergency4" />
+            android:text="STEP4 가슴압박 반복"
+            android:textStyle="bold"/>
         <VideoView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="9"
             android:id="@+id/frag4_video"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="1. 119 구급대가 도착하기 전까지 가슴압박을 계속 한다."
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
