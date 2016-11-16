@@ -1,35 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#feb702"
-    tools:context="resolution.ex6.vr.aps.MainActivity">
+    android:orientation="vertical">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
         android:id="@+id/find_patient_Button"
-        android:text="환자 위치 확인"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#95ec5300">
+        <ImageView
+            android:layout_marginLeft="30dp"
+            android:layout_width="0dp"
+            android:layout_weight="1.24"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/menu1"/>
+        <TextView
+            android:layout_marginLeft="30dp"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="환자 위치"
+            android:textColor="#ffffff"
+            android:textSize="40dp"
+            android:textStyle="bold"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/find_aed_button"
-        android:layout_marginBottom="53dp"
-        android:text="제세동기 위치 확인"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/find_patient_Button" />
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#b2ec5300">
+        <ImageView
+            android:layout_marginLeft="30dp"
+            android:layout_width="0dp"
+            android:layout_weight="1.24"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/menu2"/>
+        <TextView
+            android:layout_marginLeft="30dp"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="AED 위치"
+            android:textColor="#ffffff"
+            android:textSize="40dp"
+            android:textStyle="bold"/>
 
-    <Button
-        android:text="응급 처치"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/find_aed_button"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="27dp"
-        android:id="@+id/emergency_button" />
-</RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/emergency_button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#caec5300">
+        <ImageView
+            android:layout_marginLeft="30dp"
+            android:layout_width="0dp"
+            android:layout_weight="1.24"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/menu3"/>
+        <TextView
+            android:layout_marginLeft="30dp"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="응급 처치"
+            android:textColor="#ffffff"
+            android:textSize="40dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+</LinearLayout>

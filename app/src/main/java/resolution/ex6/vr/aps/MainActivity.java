@@ -10,7 +10,8 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+import android.view.Window;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,12 +23,13 @@ public class MainActivity extends AppCompatActivity {
     static double latitude = -1;
     //
     /***************레이아웃관련 변수 ***********/
-    Button find_patient_Button;
-    Button find_AED_Button;
-    Button emergnecy_button;
+    LinearLayout find_patient_Button;
+    LinearLayout find_AED_Button;
+    LinearLayout emergnecy_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         layoutinit();
         find_AED_Button.setOnClickListener(new View.OnClickListener() {
@@ -62,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
     }
     /***********layout inflater **********/
     public void layoutinit(){
-        find_patient_Button = (Button)findViewById(R.id.find_patient_Button);
-        find_AED_Button = (Button)findViewById(R.id.find_aed_button);
-        emergnecy_button = (Button) findViewById(R.id.emergency_button);
+        find_patient_Button = (LinearLayout)findViewById(R.id.find_patient_Button);
+        find_AED_Button = (LinearLayout)findViewById(R.id.find_aed_button);
+        emergnecy_button = (LinearLayout) findViewById(R.id.emergency_button);
     }
 
     //현재 위치를 찾는것.
