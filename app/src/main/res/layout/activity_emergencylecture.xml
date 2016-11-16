@@ -22,7 +22,7 @@
 
         <ImageView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.10"
             android:layout_height="match_parent"
             android:id="@+id/emergency_button2"
             android:src="@drawable/step2_off"
