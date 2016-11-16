@@ -2,12 +2,10 @@ package resolution.ex6.vr.aps;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 
 public class EmergencylectureActivity extends AppCompatActivity {
@@ -16,10 +14,10 @@ public class EmergencylectureActivity extends AppCompatActivity {
     Fragment emergency2Fragment;
     Fragment emergency3Fragment;
     Fragment emergency4Fragment;
-    Button emergency_button1;
-    Button emergency_button2;
-    Button emergency_button3;
-    Button emergency_button4;
+    ImageView emergency_button1;
+    ImageView emergency_button2;
+    ImageView emergency_button3;
+    ImageView emergency_button4;
     Button prevButton;
     Button nextButton;
     int currentPage = 1;
@@ -110,23 +108,10 @@ public class EmergencylectureActivity extends AppCompatActivity {
     }
 
     public void layoutinit() {
-        View view = getLayoutInflater().inflate(R.layout.customlayout, null);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setCustomView(view);
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        TextView textView = (TextView)findViewById(R.id.custom_textview);
-        textView.setText("심폐소생술 시작하기");
-        ImageView custom_imageview = (ImageView)findViewById(R.id.custom_imageview);
-        custom_imageview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-        emergency_button1 = (Button) findViewById(R.id.emergency_button1);
-        emergency_button2 = (Button) findViewById(R.id.emergency_button2);
-        emergency_button3 = (Button) findViewById(R.id.emergency_button3);
-        emergency_button4 = (Button) findViewById(R.id.emergency_button4);
+        emergency_button1 = (ImageView) findViewById(R.id.emergency_button1);
+        emergency_button2 = (ImageView) findViewById(R.id.emergency_button2);
+        emergency_button3 = (ImageView) findViewById(R.id.emergency_button3);
+        emergency_button4 = (ImageView) findViewById(R.id.emergency_button4);
         prevButton = (Button) findViewById(R.id.prevButton);
         nextButton = (Button) findViewById(R.id.nextButton);
     }

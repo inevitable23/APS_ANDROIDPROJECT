@@ -12,36 +12,42 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <Button
+        <ImageView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.95"
             android:layout_height="match_parent"
-            android:text="New Button"
             android:id="@+id/emergency_button1"
+            android:src="@drawable/stepone"
             />
 
-        <Button
+        <ImageView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="New Button"
             android:id="@+id/emergency_button2"
+            android:src="@drawable/steptwo"
             />
 
-        <Button
+        <ImageView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.10"
             android:layout_height="match_parent"
-            android:text="New Button"
             android:id="@+id/emergency_button3"
+            android:src="@drawable/stepthree"
+            android:adjustViewBounds="true"
+            android:maxHeight="3dp"
+            android:maxWidth="10dp"
             />
 
-        <Button
+        <ImageView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.89"
             android:layout_height="match_parent"
-            android:text="New Button"
             android:id="@+id/emergency_button4"
+            android:src="@drawable/stepfour"
+            android:adjustViewBounds="true"
+            android:maxHeight="3dp"
+            android:maxWidth="10dp"
             />
     </LinearLayout>
     <FrameLayout
