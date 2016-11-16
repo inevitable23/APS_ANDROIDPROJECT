@@ -2,10 +2,13 @@ package resolution.ex6.vr.aps;
 
 import android.content.Intent;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -34,8 +37,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static android.os.Build.VERSION_CODES.N;
-import static com.google.android.gms.analytics.internal.zzy.D;
 import static java.lang.Double.parseDouble;
 
 //adasd
@@ -394,5 +395,5 @@ public class AEDActivity extends NMapActivity
         intent = new Intent(Intent.ACTION_DIAL, uri);
         startActivity(intent);
     }
-    //
+    ////
 }
