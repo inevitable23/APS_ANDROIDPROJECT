@@ -7,6 +7,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.nhn.android.maps.NMapOverlay;
 import com.nhn.android.maps.NMapOverlayItem;
 import com.nhn.android.maps.NMapView;
 import com.nhn.android.maps.NMapView.OnMapStateChangeListener;
+import com.nhn.android.maps.NMapView.OnMapViewTouchEventListener;
 import com.nhn.android.maps.maplib.NGeoPoint;
 import com.nhn.android.maps.nmapmodel.NMapError;
 import com.nhn.android.maps.overlay.NMapPOIdata;
@@ -37,11 +39,12 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static com.nhn.android.maps.NMapView.ANIMATION_STATE_FINISHED;
 import static java.lang.Double.parseDouble;
 
 //adasd
 public class AEDActivity extends NMapActivity
-        implements OnMapStateChangeListener, OnCalloutOverlayListener, ListViewAdapter.ListClickListener{
+        implements OnMapStateChangeListener, OnCalloutOverlayListener, ListViewAdapter.ListClickListener, OnMapViewTouchEventListener{
 
     // API-KEY
     public static final String API_KEY = "mo8MMpoxRZggZYZ9JdKy";
@@ -177,18 +180,6 @@ public class AEDActivity extends NMapActivity
                 adapter.notifyDataSetChanged();
             }
             showAEDList(latitude, longitude);
-            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                    ListViewItem item = (ListViewItem) parent.getItemAtPosition(position);
-                    Drawable iconDrawable = item.getIcon();
-                    Intent intent;
-                    Uri uri;
-                    uri = Uri.parse("tel:"+telArr.get(position));
-                    intent = new Intent(Intent.ACTION_DIAL, uri);
-                    startActivity(intent);
-                }
-            });
         }
     }
 
@@ -228,10 +219,37 @@ public class AEDActivity extends NMapActivity
      */
     @Override
     public void onAnimationStateChange(NMapView arg0, int animType,
-                                       int animState) {}
+                                       int animState) {   }
 
     @Override
     public void onMapCenterChangeFine(NMapView arg0) {}
+
+    /** 지도 터치시 이벤트 */
+    @Override
+    public void onLongPress(NMapView nMapView, MotionEvent motionEvent) {
+    }
+
+    @Override
+    public void onLongPressCanceled(NMapView nMapView) {
+    }
+
+    @Override
+    public void onTouchDown(NMapView nMapView, MotionEvent motionEvent) {
+    }
+
+    @Override
+    public void onTouchUp(NMapView nMapView, MotionEvent motionEvent) {
+    }
+
+    @Override
+    public void onScroll(NMapView nMapView, MotionEvent motionEvent, MotionEvent motionEvent1) {
+
+    }
+
+    @Override
+    public void onSingleTapUp(NMapView nMapView, MotionEvent motionEvent) {
+
+    }
 
     /** 오버레이가 클릭되었을 때의 이벤트 */
     @Override
