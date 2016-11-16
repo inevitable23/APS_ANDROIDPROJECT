@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:textColor="#f0ac8a"
             android:text="STEP1 의식확인 및 119 신고"
             android:textStyle="bold"/>
 
@@ -23,18 +24,20 @@
             android:id="@+id/frag1_video"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5" />
+            android:layout_weight="9" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:text="1. 환자를 바로 눕힌 후 어깨를 가볍게 치면서 의식이 있는지 확인한다." />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:text="2. 주변 사람들에게 119신고 및 자동제세동기를 가져올 것을 요청한다." />
     </LinearLayout>
 </FrameLayout>

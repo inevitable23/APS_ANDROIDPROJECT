@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:textColor="#e67339"
             android:text="STEP3 자동심장충격기 사용"
             android:textStyle="bold"/>
         <VideoView

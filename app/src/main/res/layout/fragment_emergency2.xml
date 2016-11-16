@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:textColor="#ff0000"
+            android:textColor="#eb8c5e"
             android:text="STEP2 가슴압박 시작"
             android:textStyle="bold"/>
         <VideoView
